@@ -31,10 +31,13 @@ export class CustomersService {
       .exec();
   }
 
-  async update(id: string, updateCustomerDto: UpdateCustomerDto) {
-    return await this.customerModel
-      .findByIdAndUpdate(id, updateCustomerDto)
-      .exec();
+  async update(query: string, updateCustomerDto: UpdateCustomerDto) {
+    const customer = await this.findOne(query);
+    if (customer)
+      return await this.customerModel.findByIdAndUpdate(
+        customer.id,
+        updateCustomerDto,
+      );
   }
 
   remove(id: number) {

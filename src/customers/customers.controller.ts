@@ -16,26 +16,26 @@ export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
   @Post()
-  create(@Body() createCustomerDto: CreateCustomerDto) {
-    return this.customersService.create(createCustomerDto);
+  async create(@Body() createCustomerDto: CreateCustomerDto) {
+    return await this.customersService.create(createCustomerDto);
   }
 
   @Get()
-  findAll() {
-    return this.customersService.findAll();
+  async findAll() {
+    return await this.customersService.findAll();
   }
 
   @Get(':query')
-  findOne(@Param('query') query: string) {
-    return this.customersService.findOne(query);
+  async findOne(@Param('query') query: string) {
+    return await this.customersService.findOne(query);
   }
 
-  @Patch(':id')
+  @Patch(':query')
   async update(
-    @Param('id') id: string,
+    @Param('query') query: string,
     @Body() updateCustomerDto: UpdateCustomerDto,
   ) {
-    return await this.customersService.update(id, updateCustomerDto);
+    return await this.customersService.update(query, updateCustomerDto);
   }
 
   @Delete(':id')
