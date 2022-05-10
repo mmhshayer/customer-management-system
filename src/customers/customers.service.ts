@@ -19,7 +19,10 @@ export class CustomersService {
     }).save();
   }
 
-  async findAll() {
+  async findAll(age: boolean) {
+    if (age == true) {
+      return await this.customerModel.find({ age: { $lt: 30 } }).exec();
+    }
     return await this.customerModel.find().exec();
   }
 
