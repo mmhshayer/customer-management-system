@@ -27,15 +27,15 @@ export class CustomersController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.customersService.findOne(+id);
+    return this.customersService.findOne(id);
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateCustomerDto: UpdateCustomerDto,
   ) {
-    return this.customersService.update(+id, updateCustomerDto);
+    return await this.customersService.update(id, updateCustomerDto);
   }
 
   @Delete(':id')
