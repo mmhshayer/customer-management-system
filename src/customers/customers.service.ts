@@ -23,8 +23,12 @@ export class CustomersService {
     return await this.customerModel.find().exec();
   }
 
-  async findOne(id: string) {
-    return await this.customerModel.findById(id).exec();
+  async findOne(query: string) {
+    return await this.customerModel
+      .findOne({
+        $where: `this.name.indexOf('${query}') !== -1 || this._id.toString().indexOf('${query}') !== -1`,
+      })
+      .exec();
   }
 
   async update(id: string, updateCustomerDto: UpdateCustomerDto) {
